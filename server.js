@@ -1,13 +1,15 @@
 import express from "express";
 import mongoose from "mongoose";
+import dotenv from "dotenv"
 
 const app = express();
+dotenv.config()
 
 try {
-    await mongoose.connect('mongodb+srv://congl217201:congle@cluster0.guahucl.mongodb.net/?retryWrites=true&w=majority&dbname=design');
+    await mongoose.connect(process.env.MONGO);
     console.log("Connected to MongoDB");
 } catch (error) {
-    handleError(error);
+    console.log(error);
 }
 
 app.listen(5143, () => {
