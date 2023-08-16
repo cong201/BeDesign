@@ -31,6 +31,13 @@ app.use("/api/order", orderRoute)
 app.use("/api/message", messageRoute)
 app.use("/api/review", reviewRoute)
 
+app.use((err, req, res, next) => {
+    const errorStatus = err.status || 500
+    const errorMessage = err.message || "Something went wrong!"
+
+    return res.status(errorStatus).send(errorMessage)
+})
+
 app.listen(5143, () => {
     console.log("Backend listening on port 5143");
 })
